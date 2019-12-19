@@ -20,10 +20,12 @@ public class GameEngine implements Runnable {
 
     @Override
     public void run() {
-        // what to do
+
+        init();
+
     }
 
-    /* package-private */ void init() {
+    private void init() {
 
         game.init();
         display.show();

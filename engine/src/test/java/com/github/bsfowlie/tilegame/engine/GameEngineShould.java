@@ -35,10 +35,10 @@ class GameEngineShould implements WithAssertions {
 
     }
 
-    @Test void initialize_game_and_display() {
+    @Test void initialize_game_and_display_when_run() {
 
         // when
-        engine.init();
+        engine.run();
 
         // then
         then(game).should().init();
