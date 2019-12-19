@@ -43,7 +43,9 @@ project(':engine') {
         integrationRuntimeOnly.extendsFrom testRuntimeOnly
     }
     dependencies {
-        integrationImplementation 'org.assertj:assertj-swing-junit:3.9.2'
+        integrationImplementation('org.assertj:assertj-swing-junit:3.9.2') {
+            exclude group: 'junit', module: 'junit'
+        }
     }
     task integration(type: Test) {
         description = 'Runs the integration tests.'
