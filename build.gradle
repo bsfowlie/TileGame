@@ -54,6 +54,8 @@ project(':engine') {
         testClassesDirs = sourceSets.integration.output.classesDirs
         classpath = sourceSets.integration.runtimeClasspath
 
+        useJUnitPlatform()
+
         shouldRunAfter test
     }
     check.dependsOn integration

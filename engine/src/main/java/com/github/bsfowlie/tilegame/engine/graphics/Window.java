@@ -1,5 +1,7 @@
 package com.github.bsfowlie.tilegame.engine.graphics;
 
+import javax.swing.*;
+
 class Window implements Display {
 
     private final String title;
@@ -22,6 +24,11 @@ class Window implements Display {
 
     @Override
     public void show() {
+
+        JFrame frame = new JFrame(title);
+        frame.setName(title);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
 
     }
 
