@@ -1,6 +1,6 @@
 package com.github.bsfowlie.tilegame.engine.graphics;
 
-public class Window implements Display {
+class Window implements Display {
 
     private final String title;
 
