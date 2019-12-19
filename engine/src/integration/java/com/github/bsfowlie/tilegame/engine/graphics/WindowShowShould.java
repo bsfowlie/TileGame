@@ -62,6 +62,17 @@ class WindowShowShould implements WithAssertions {
     }
 
     @Test
+    void have_a_title() {
+
+        // given
+
+        // when
+
+        // then
+        frame.requireTitle(TITLE);
+    }
+
+    @Test
     void not_be_resizeable() {
 
         // given
