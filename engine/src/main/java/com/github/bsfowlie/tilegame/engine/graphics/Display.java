@@ -6,4 +6,6 @@ public interface Display {
 
     String title();
 
+    int width();
+
 }

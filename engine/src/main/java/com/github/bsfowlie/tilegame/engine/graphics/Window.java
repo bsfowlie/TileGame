@@ -4,9 +4,13 @@ public class Window implements Display {
 
     private final String title;
 
-    public Window(final String title) {
+    private final int width;
+
+    public Window(final String title, final int width) {
 
         this.title = title;
+        this.width = width;
+
     }
 
     @Override
@@ -18,6 +22,13 @@ public class Window implements Display {
     public String title() {
 
         return title;
+
+    }
+
+    @Override
+    public int width() {
+
+        return width;
 
     }
 }
