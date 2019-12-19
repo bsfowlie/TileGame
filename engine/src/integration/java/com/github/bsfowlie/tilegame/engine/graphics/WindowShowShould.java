@@ -3,6 +3,8 @@ package com.github.bsfowlie.tilegame.engine.graphics;
 import static org.assertj.swing.core.BasicRobot.robotWithCurrentAwtHierarchy;
 import static org.assertj.swing.finder.WindowFinder.findFrame;
 
+import java.awt.*;
+
 import org.assertj.core.api.WithAssertions;
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.edt.GuiActionRunner;
@@ -24,26 +26,30 @@ class WindowShowShould implements WithAssertions {
 
     private FrameFixture frame;
 
-    @BeforeAll static void setupAccessCheck() {
+    @BeforeAll
+    static void setupAccessCheck() {
 
         FailOnThreadViolationRepaintManager.install();
 
     }
 
-    @BeforeEach void setupWindow() {
+    @BeforeEach
+    void setupWindow() {
 
         window = Display.create(TITLE, WIDTH, HEIGHT);
-        GuiActionRunner.execute(()->window.show());
+        GuiActionRunner.execute(() -> window.show());
 
     }
 
-    @BeforeEach void setupFrame() {
+    @BeforeEach
+    void setupFrame() {
 
         frame = findFrame(TITLE).using(robotWithCurrentAwtHierarchy());
 
     }
 
-    @Test void display_the_window() {
+    @Test
+    void display_the_window() {
 
         // given
 
@@ -53,9 +59,22 @@ class WindowShowShould implements WithAssertions {
         frame.requireVisible();
     }
 
-    @AfterEach void cleanupFrame() {
+    @Test
+    void not_be_resizeable() {
+
+        // given
+
+        // when
+
+        // then
+        assertThatIllegalStateException().isThrownBy(() -> frame.resizeTo(new Dimension(2 * WIDTH, 2 * HEIGHT)));
+    }
+
+    @AfterEach
+    void cleanupFrame() {
 
         frame.cleanUp();
 
     }
+
 }

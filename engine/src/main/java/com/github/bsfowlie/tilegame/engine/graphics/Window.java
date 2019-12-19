@@ -28,6 +28,7 @@ class Window implements Display {
         JFrame frame = new JFrame(title);
         frame.setName(title);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
         frame.setVisible(true);
 
     }
