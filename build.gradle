@@ -14,24 +14,10 @@ subprojects {
     }
     ext {
         assertjVersion = '3.14.0'
+        assertjSwingVersion = '3.9.2'
         mockitoVersion = '3.2.0'
         jupiterVersion = '5.5.1'
     }
-    dependencies {
-        testImplementation "org.assertj:assertj-core:$assertjVersion"
-        testImplementation "org.mockito:mockito-core:$mockitoVersion"
-        testImplementation "org.mockito:mockito-junit-jupiter:$mockitoVersion"
-        testImplementation "org.junit.jupiter:junit-jupiter-api:$jupiterVersion"
-        testImplementation "org.junit.jupiter:junit-jupiter-params:$jupiterVersion"
-        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jupiterVersion"
-    }
-    test {
-        useJUnitPlatform()
-    }
-}
-
-project(':engine') {
-    apply plugin: 'java-library'
     sourceSets {
         integration {
             compileClasspath += sourceSets.main.output
@@ -43,9 +29,18 @@ project(':engine') {
         integrationRuntimeOnly.extendsFrom testRuntimeOnly
     }
     dependencies {
-        integrationImplementation('org.assertj:assertj-swing-junit:3.9.2') {
+        testImplementation "org.assertj:assertj-core:$assertjVersion"
+        testImplementation "org.mockito:mockito-core:$mockitoVersion"
+        testImplementation "org.mockito:mockito-junit-jupiter:$mockitoVersion"
+        testImplementation "org.junit.jupiter:junit-jupiter-api:$jupiterVersion"
+        testImplementation "org.junit.jupiter:junit-jupiter-params:$jupiterVersion"
+        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jupiterVersion"
+        integrationImplementation("org.assertj:assertj-swing-junit:$assertjSwingVersion") {
             exclude group: 'junit', module: 'junit'
         }
+    }
+    test {
+        useJUnitPlatform()
     }
     task integration(type: Test) {
         description = 'Runs the integration tests.'
@@ -59,6 +54,10 @@ project(':engine') {
         shouldRunAfter test
     }
     check.dependsOn integration
+}
+
+project(':engine') {
+    apply plugin: 'java-library'
 }
 
 project(':application') {
