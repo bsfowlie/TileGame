@@ -6,10 +6,17 @@ public class Window implements Display {
 
     private final int width;
 
-    public Window(final String title, final int width) {
+    private final int height;
+
+    public Window(
+            final String title,
+            final int width,
+            final int height
+    ) {
 
         this.title = title;
         this.width = width;
+        this.height = height;
 
     }
 
@@ -29,6 +36,13 @@ public class Window implements Display {
     public int width() {
 
         return width;
+
+    }
+
+    @Override
+    public int height() {
+
+        return height;
 
     }
 }

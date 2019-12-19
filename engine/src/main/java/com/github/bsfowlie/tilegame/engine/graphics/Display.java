@@ -8,4 +8,6 @@ public interface Display {
 
     int width();
 
+    int height();
+
 }
