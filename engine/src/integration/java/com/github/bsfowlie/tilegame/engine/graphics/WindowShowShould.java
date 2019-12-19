@@ -16,6 +16,8 @@ import org.junit.jupiter.api.Test;
 
 class WindowShowShould implements WithAssertions {
 
+    private static final String NAMED = "game";
+
     private static final String TITLE = "Tile Game!";
 
     private static final int WIDTH = 800;
@@ -44,7 +46,7 @@ class WindowShowShould implements WithAssertions {
     @BeforeEach
     void setupFrame() {
 
-        frame = findFrame(TITLE).using(robotWithCurrentAwtHierarchy());
+        frame = findFrame(NAMED).using(robotWithCurrentAwtHierarchy());
 
     }
 

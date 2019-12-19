@@ -4,6 +4,8 @@ import javax.swing.*;
 
 class Window implements Display {
 
+    private static final String FRAME_NAME = "game";
+
     private final String title;
 
     private final int width;
@@ -26,7 +28,7 @@ class Window implements Display {
     public void show() {
 
         JFrame frame = new JFrame(title);
-        frame.setName(title);
+        frame.setName(FRAME_NAME);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setVisible(true);
