@@ -28,6 +28,12 @@ class Window implements Display {
     @Override
     public void show() {
 
+        SwingUtilities.invokeLater(this::createFrame);
+
+    }
+
+    private void createFrame() {
+
         JFrame frame = new JFrame(title);
         frame.setName(FRAME_NAME);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

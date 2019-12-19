@@ -8,7 +8,6 @@ import javax.swing.*;
 
 import org.assertj.core.api.WithAssertions;
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
-import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -25,8 +24,6 @@ class WindowShowShould implements WithAssertions {
 
     private static final int HEIGHT = 640;
 
-    private Display window;
-
     private FrameFixture frame;
 
     @BeforeAll
@@ -39,8 +36,7 @@ class WindowShowShould implements WithAssertions {
     @BeforeEach
     void setupWindow() {
 
-        window = Display.create(TITLE, WIDTH, HEIGHT);
-        GuiActionRunner.execute(() -> window.show());
+        Display.create(TITLE, WIDTH, HEIGHT).show();
 
     }
 
