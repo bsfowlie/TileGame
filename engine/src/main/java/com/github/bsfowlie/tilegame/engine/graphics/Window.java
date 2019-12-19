@@ -1,5 +1,6 @@
 package com.github.bsfowlie.tilegame.engine.graphics;
 
+import java.awt.*;
 import javax.swing.*;
 
 class Window implements Display {
@@ -33,6 +34,14 @@ class Window implements Display {
         frame.setResizable(false);
         frame.setVisible(true);
 
+        final Dimension size = new Dimension(width, height);
+        final Canvas canvas = new Canvas();
+        canvas.setMaximumSize(size);
+        canvas.setMinimumSize(size);
+        canvas.setPreferredSize(size);
+
+        frame.add(canvas);
+        frame.pack();
     }
 
     @Override

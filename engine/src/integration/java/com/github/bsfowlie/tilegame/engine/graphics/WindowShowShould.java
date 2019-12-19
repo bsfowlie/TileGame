@@ -4,6 +4,7 @@ import static org.assertj.swing.core.BasicRobot.robotWithCurrentAwtHierarchy;
 import static org.assertj.swing.finder.WindowFinder.findFrame;
 
 import java.awt.*;
+import javax.swing.*;
 
 import org.assertj.core.api.WithAssertions;
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
@@ -59,6 +60,7 @@ class WindowShowShould implements WithAssertions {
 
         // then
         frame.requireVisible();
+
     }
 
     @Test
@@ -70,6 +72,7 @@ class WindowShowShould implements WithAssertions {
 
         // then
         frame.requireTitle(TITLE);
+
     }
 
     @Test
@@ -81,6 +84,29 @@ class WindowShowShould implements WithAssertions {
 
         // then
         assertThatIllegalStateException().isThrownBy(() -> frame.resizeTo(new Dimension(2 * WIDTH, 2 * HEIGHT)));
+
+    }
+
+    @Test
+    void have_a_canvas() {
+
+        // given
+
+        // when
+
+        // then
+        assertThat(((JFrame) frame.target()).getContentPane().getComponentCount())
+                .as("Number of Components in frame")
+                .isEqualTo(1);
+
+        assertThat(((JFrame) frame.target()).getContentPane().getComponent(0))
+                .as("Component should be a Canvas")
+                .isInstanceOf(Canvas.class);
+
+        assertThat(((JFrame) frame.target()).getContentPane().getComponent(0).getSize())
+                .as("Size of the Canvas")
+                .isEqualTo(new Dimension(WIDTH, HEIGHT));
+
     }
 
     @AfterEach
