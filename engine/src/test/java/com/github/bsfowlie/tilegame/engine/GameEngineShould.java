@@ -1,5 +1,7 @@
 package com.github.bsfowlie.tilegame.engine;
 
+import static org.mockito.BDDMockito.then;
+
 import com.github.bsfowlie.tilegame.engine.graphics.Display;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,10 +20,30 @@ class GameEngineShould implements WithAssertions {
     private GameEngine engine;
 
     @BeforeEach void setupEngine() {
+
+        // given
         engine = new GameEngine(game, display);
+
     }
 
     @Test void be_runnable() {
+
+        // when
+
+        // then
         assertThat(engine).isInstanceOf(Runnable.class);
+
     }
+
+    @Test void initialize_game_and_display() {
+
+        // when
+        engine.init();
+
+        // then
+        then(game).should().init();
+        then(display).should().show();
+
+    }
+
 }
