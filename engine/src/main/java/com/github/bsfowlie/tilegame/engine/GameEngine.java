@@ -23,6 +23,11 @@ public class GameEngine implements Runnable {
 
         init();
 
+        while (game.running()) {
+            game.update();
+            display.render(game);
+        }
+
     }
 
     private void init() {

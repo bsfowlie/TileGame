@@ -3,6 +3,8 @@ package com.github.bsfowlie.tilegame.engine.graphics;
 import java.awt.*;
 import javax.swing.*;
 
+import com.github.bsfowlie.tilegame.engine.Game;
+
 class Window implements Display {
 
     private static final String FRAME_NAME = "game";
@@ -70,4 +72,12 @@ class Window implements Display {
         return height;
 
     }
+
+    @Override
+    public void render(
+            final Game game
+    ) {
+        // what to do
+    }
+
 }

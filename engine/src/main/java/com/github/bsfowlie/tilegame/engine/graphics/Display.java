@@ -1,5 +1,7 @@
 package com.github.bsfowlie.tilegame.engine.graphics;
 
+import com.github.bsfowlie.tilegame.engine.Game;
+
 public interface Display {
 
     static Display create(String title, int width, int height) {
@@ -15,5 +17,7 @@ public interface Display {
     int width();
 
     int height();
+
+    void render(Game game);
 
 }

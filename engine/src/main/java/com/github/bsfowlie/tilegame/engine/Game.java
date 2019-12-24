@@ -4,4 +4,8 @@ public interface Game {
 
     void init();
 
+    boolean running();
+
+    void update();
+
 }
