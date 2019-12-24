@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 class WindowShowShould implements WithAssertions {
 
-    private static final String NAMED = "game";
+    private static final String NAMED_GAME = "game";
 
     private static final String TITLE = "Tile Game!";
 
@@ -37,7 +37,7 @@ class WindowShowShould implements WithAssertions {
     void setupFrame() {
 
         Display.create(TITLE, WIDTH, HEIGHT).show();
-        frame = findFrame(NAMED).using(robotWithCurrentAwtHierarchy());
+        frame = findFrame(NAMED_GAME).using(robotWithCurrentAwtHierarchy());
 
     }
 
@@ -78,7 +78,7 @@ class WindowShowShould implements WithAssertions {
     }
 
     @Test
-    void have_a_canvas() {
+    void have_one_component() {
 
         // given
 
@@ -86,15 +86,32 @@ class WindowShowShould implements WithAssertions {
 
         // then
         assertThat(((JFrame) frame.target()).getContentPane().getComponentCount())
-                .as("Number of Components in frame")
                 .isEqualTo(1);
 
+    }
+
+    @Test
+    void have_a_canvas_component() {
+
+        // given
+
+        // when
+
+        // then
         assertThat(((JFrame) frame.target()).getContentPane().getComponent(0))
-                .as("Component should be a Canvas")
                 .isInstanceOf(Canvas.class);
 
+    }
+
+    @Test
+    void have_a_canvas_with_requested_size() {
+
+        // given
+
+        // when
+
+        // then
         assertThat(((JFrame) frame.target()).getContentPane().getComponent(0).getSize())
-                .as("Size of the Canvas")
                 .isEqualTo(new Dimension(WIDTH, HEIGHT));
 
     }
