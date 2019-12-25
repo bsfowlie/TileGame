@@ -1,6 +1,7 @@
 package com.github.bsfowlie.tilegame.engine.graphics;
 
 import java.awt.*;
+import java.awt.image.BufferStrategy;
 import javax.swing.*;
 
 import com.github.bsfowlie.tilegame.engine.Game;
@@ -14,6 +15,8 @@ class Window implements Display {
     private final int width;
 
     private final int height;
+
+    private Canvas canvas;
 
     public Window(
             final String title,
@@ -43,7 +46,7 @@ class Window implements Display {
         frame.setVisible(true);
 
         final Dimension size = new Dimension(width, height);
-        final Canvas canvas = new Canvas();
+        canvas = new Canvas();
         canvas.setMaximumSize(size);
         canvas.setMinimumSize(size);
         canvas.setPreferredSize(size);
@@ -77,7 +80,27 @@ class Window implements Display {
     public void render(
             final Game game
     ) {
-        // what to do
+
+        if (canvas.getBufferStrategy() == null) {
+            canvas.createBufferStrategy(3);
+        }
+
+        renderWith(canvas.getBufferStrategy(), game);
+
+    }
+
+    /* package-private*/ void renderWith(final BufferStrategy strategy, final Game game) {
+
+        renderTo((Graphics2D) strategy.getDrawGraphics(), game);
+        strategy.show();
+
+    }
+
+    /* package-private*/ void renderTo(final Graphics2D g2d, final Game game) {
+
+        game.renderTo(g2d);
+        g2d.dispose();
+
     }
 
 }
