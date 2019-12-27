@@ -25,7 +25,7 @@ class MainShould implements WithAssertions {
 
     @BeforeEach void setupFrame() {
 
-        Main.main(new String[0]);
+        Main.main(new String[] {"-stayAlive"});
         frame = findFrame(NAMED_GAME).using(robotWithCurrentAwtHierarchy());
 
     }
@@ -41,24 +41,5 @@ class MainShould implements WithAssertions {
         frame.cleanUp();
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
