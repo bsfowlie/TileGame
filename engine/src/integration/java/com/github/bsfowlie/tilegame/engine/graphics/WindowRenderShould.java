@@ -37,6 +37,8 @@ class WindowRenderShould implements WithAssertions {
 
     private FrameFixture frame;
 
+    @Mock private Game game;
+
     @BeforeAll
     static void setupAccessCheck() {
 
@@ -48,13 +50,13 @@ class WindowRenderShould implements WithAssertions {
     void setupFrame() {
 
         window = (Window) Display.create(TITLE, WIDTH, HEIGHT);
-        window.show();
+        SwingUtilities.invokeLater(window::show);
         frame = findFrame(NAMED_GAME).using(robotWithCurrentAwtHierarchy());
 
     }
 
     @Test
-    void call_game_to_render_when_invoked(@Mock Game game) {
+    void call_game_to_render_when_invoked() {
 
         // given
 
@@ -67,7 +69,7 @@ class WindowRenderShould implements WithAssertions {
     }
 
     @Test
-    void create_buffer_strategy_only_when_invoked_first_time(@Mock Game game) {
+    void create_buffer_strategy_only_when_invoked_first_time() {
 
         // given
         final Canvas canvas = (Canvas) ((JFrame) frame.target()).getContentPane().getComponent(0);
@@ -89,22 +91,25 @@ class WindowRenderShould implements WithAssertions {
     }
 
     @Test
-    void shows_the_rendered_frame(@Mock BufferStrategy strategy, @Mock Graphics2D g2d, @Mock Game game) {
+    void shows_the_rendered_frame(@Mock BufferStrategy strategy, @Mock Graphics2D g2d) {
 
         // given
         given(strategy.getDrawGraphics()).willReturn(g2d);
+        given(strategy.contentsRestored()).willReturn(true,false, true, false);
+        given(strategy.contentsLost()).willReturn(true,false);
 
         // when
         window.renderWith(strategy, game);
 
         // then
         then(game).should(atLeastOnce()).renderTo(any(Graphics2D.class));
-        then(strategy).should(times(1)).show();
+        then(g2d).should(times(4)).dispose();
+        then(strategy).should(times(2)).show();
 
     }
 
     @Test
-    void cleanup_graphics_after_rendering(@Mock Graphics2D g2d, @Mock Game game) {
+    void cleanup_graphics_after_rendering(@Mock Graphics2D g2d) {
 
         // given
 

@@ -33,7 +33,7 @@ class Window implements Display {
     @Override
     public void show() {
 
-        SwingUtilities.invokeLater(this::createFrame);
+        createFrame();
 
     }
 
@@ -91,8 +91,12 @@ class Window implements Display {
 
     /* package-private*/ void renderWith(final BufferStrategy strategy, final Game game) {
 
-        renderTo((Graphics2D) strategy.getDrawGraphics(), game);
-        strategy.show();
+        do {
+            do {
+                renderTo((Graphics2D) strategy.getDrawGraphics(), game);
+            } while (strategy.contentsRestored());
+            strategy.show();
+        } while (strategy.contentsLost());
 
     }
 

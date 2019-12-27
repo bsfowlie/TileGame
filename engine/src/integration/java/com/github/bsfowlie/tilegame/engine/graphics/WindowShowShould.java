@@ -36,7 +36,8 @@ class WindowShowShould implements WithAssertions {
     @BeforeEach
     void setupFrame() {
 
-        Display.create(TITLE, WIDTH, HEIGHT).show();
+        final Display display = Display.create(TITLE, WIDTH, HEIGHT);
+        SwingUtilities.invokeLater(display::show);
         frame = findFrame(NAMED_GAME).using(robotWithCurrentAwtHierarchy());
 
     }
